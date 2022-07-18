@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import router from "express";
+import express from "express";
 import { routes } from "./routes";
 import { AppDataSource } from "./Database/AppDataSource";
 
@@ -7,8 +7,9 @@ AppDataSource.initialize()
     .then(() => {
         console.log("Database initialized!");
 
-        const app = router();
+        const app = express();
 
+        app.use(express.json());
         app.use(routes);
         
         app.listen(3001, () => {
